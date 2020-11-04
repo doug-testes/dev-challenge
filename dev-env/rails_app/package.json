@@ -1,0 +1,20 @@
+{
+  "name": "rails_app",
+  "private": true,
+  "scripts": {
+    "install-theme": "yarn --cwd vendor/theme/stisla install",
+    "build-theme": "yarn --cwd vendor/theme/stisla dist",
+    "build": "yarn install ; yarn install-theme",
+    "heroku-prebuild": "yarn build"
+  },
+  "dependencies": {
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "4.3.0"
+  },
+  "version": "0.1.0",
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
+  }
+}
