@@ -10,9 +10,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_11_04_032426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "addresses", force: :cascade do |t|
+    t.string "street", default: "", null: false
+    t.string "number", default: "", null: false
+    t.string "postal_code", default: "", null: false
+    t.string "complement", default: "", null: false
+    t.string "neighbourdhood", default: "", null: false
+    t.string "city", default: "", null: false
+    t.string "state", default: "", null: false
+    t.bigint "company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_addresses_on_company_id"
+  end
+
+  create_table "borrower_installments", force: :cascade do |t|
+    t.integer "status", default: 0, null: false
+    t.bigint "borrower_request_id", null: false
+    t.integer "value", default: 0, null: false
+    t.date "due_date", null: false
+    t.integer "installment_number", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["borrower_request_id"], name: "index_borrower_installments_on_borrower_request_id"
+  end
+
+  create_table "borrower_requests", force: :cascade do |t|
+    t.integer "status", default: 0, null: false
+    t.integer "loan_value", default: 0, null: false
+    t.decimal "rate", default: "0.015", null: false
+    t.integer "installments", default: 0, null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.bigint "company_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_borrower_requests_on_company_id"
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "cnpj", default: "", null: false
+    t.string "phone", default: "", null: false
+    t.string "name", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cnpj"], name: "index_companies_on_cnpj", unique: true
+  end
+
+  add_foreign_key "addresses", "companies"
+  add_foreign_key "borrower_installments", "borrower_requests"
+  add_foreign_key "borrower_requests", "companies"
 end
