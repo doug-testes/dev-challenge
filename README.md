@@ -48,12 +48,12 @@ Você pode fazer sua solitiação agora mesmo pelo site: https://nexx-app.heroku
 
 ## Escolhas técnicas
 
-Ruby: 2.5.7
-Rails: 6.0.3.4
-Banco de dados: Postgres 11.6
-Testes: RSpec
-API para CEP: viacep.com.br
-Layout: Stisla https://github.com/stisla/stisla
+- Ruby: 2.5.7
+- Rails: 6.0.3.4
+- Banco de dados: Postgres 11.6
+- Testes: RSpec
+- API para CEP: viacep.com.br
+- Layout: Stisla https://github.com/stisla/stisla
 
 ## Ambiente de desenvolvimento
 
@@ -75,6 +75,6 @@ Com o ambiente de desenvolvimento preparado basta rodar:
 
 ## Melhorias
 
-[ ] API de autcomplet para os CNPJ -> Receitaws
-[ ] Autenticação e segurança
-[ ] Melhorias no mobile
+- [ ] API de autcomplet para os CNPJ -> Receitaws
+- [ ] Autenticação e segurança
+- [ ] Melhorias no mobile
