@@ -35,3 +35,46 @@ Construa uma aplicação web, utilizando a linguagem e frameworks de sua prefer�
 - Inglês técnico(desejável);
 
 Ao finalizar, faça um Pull Request neste repositório e avise-nos por email.
+
+
+
+# Sobre o app construído: Nexx
+
+A Nexx é uma plataforma online sem burocracia e sem taxas abusivas que possibilita empresas obterem um emprestimo.
+Você pode fazer sua solitiação agora mesmo pelo site: https://nexx-app.herokuapp.com
+
+## ERD
+![alt ERD](https://i.imgur.com/FIYJtFZ.png "ERD")
+
+## Escolhas técnicas
+
+Ruby: 2.5.7
+Rails: 6.0.3.4
+Banco de dados: Postgres 11.6
+Testes: RSpec
+API para CEP: viacep.com.br
+Layout: Stisla https://github.com/stisla/stisla
+
+## Ambiente de desenvolvimento
+
+Execute os comandos abaixo para iniciar seu ambiente de desenvolvimento utilizando o Docker Compose na porta 3001
+
+1. `git clone https://github.com/doug-testes/dev-challenge.git`
+1. `cd dev-challenge/dev-env`
+1. `cp rails_app/.env.sample rails_app/.env`
+1. `docker-compose build`
+1. `docker-compose run app rails db:make`
+1. `docker-compose up`
+
+Acesse a url: http://localhost:3001/
+
+## Rodar cobertura de testes
+Com o ambiente de desenvolvimento preparado basta rodar:
+
+```docker-compose run app rspec```
+
+## Melhorias
+
+[ ] API de autcomplet para os CNPJ -> Receitaws
+[ ] Autenticação e segurança
+[ ] Melhorias no mobile
