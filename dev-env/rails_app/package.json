@@ -11,7 +11,9 @@
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "4.3.0"
+    "@rails/webpacker": "4.3.0",
+    "expose-loader": "^1.0.1",
+    "jquery-mask-plugin": "^1.14.16"
   },
   "version": "0.1.0",
   "devDependencies": {

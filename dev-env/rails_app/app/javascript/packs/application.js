@@ -17,6 +17,7 @@ require("channels")
 
 
 // plugins
+require('jquery-mask-plugin')
 require("@stisla/node_modules/popper.js/dist/popper.js")
 require("@stisla/node_modules/bootstrap/dist/js/bootstrap")
 require('@stisla/assets/js/stisla')
