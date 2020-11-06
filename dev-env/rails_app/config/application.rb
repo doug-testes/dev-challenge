@@ -20,6 +20,11 @@ module RailsApp
     config.generators.system_tests = nil
 
     config.i18n.default_locale = :"pt-BR"
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales','**' ,'*.{rb,yml}').to_s]
     Time.zone = "America/Sao_Paulo"
+
+
+    %w(app/models/_validators).each { |dir| Rails.autoloaders.main.push_dir(Rails.root.join(dir)) }
+
   end
 end
