@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_11_04_032426) do
     t.string "number", default: "", null: false
     t.string "postal_code", default: "", null: false
     t.string "complement", default: "", null: false
-    t.string "neighbourdhood", default: "", null: false
+    t.string "neighbourhood", default: "", null: false
     t.string "city", default: "", null: false
     t.string "state", default: "", null: false
     t.bigint "company_id", null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2020_11_04_032426) do
   create_table "borrower_installments", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.bigint "borrower_request_id", null: false
-    t.integer "value", default: 0, null: false
+    t.integer "amount_in_cents", default: 0, null: false
     t.date "due_date", null: false
     t.integer "installment_number", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -42,27 +42,28 @@ ActiveRecord::Schema.define(version: 2020_11_04_032426) do
 
   create_table "borrower_requests", force: :cascade do |t|
     t.integer "status", default: 0, null: false
-    t.integer "loan_value", default: 0, null: false
+    t.integer "loan_amount_in_cents", default: 0, null: false
     t.decimal "rate", default: "0.015", null: false
-    t.integer "installments", default: 0, null: false
+    t.integer "installments", default: 12, null: false
+    t.integer "installments_amount_in_cents", default: 0, null: false
+    t.integer "total_amount_payable_in_cents", default: 0, null: false
     t.date "start_date"
     t.date "end_date"
-    t.bigint "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_borrower_requests_on_company_id"
   end
 
   create_table "companies", force: :cascade do |t|
     t.string "cnpj", default: "", null: false
     t.string "phone", default: "", null: false
     t.string "name", default: "", null: false
+    t.bigint "borrower_request_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["cnpj"], name: "index_companies_on_cnpj", unique: true
+    t.index ["borrower_request_id"], name: "index_companies_on_borrower_request_id"
   end
 
   add_foreign_key "addresses", "companies"
   add_foreign_key "borrower_installments", "borrower_requests"
-  add_foreign_key "borrower_requests", "companies"
+  add_foreign_key "companies", "borrower_requests"
 end
