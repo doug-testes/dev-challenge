@@ -7,8 +7,9 @@
 
             <div class="card card-primary">
               <div class="row m-0">
+              <div class="card-header text-center"><h4>Dados da empresa</h4></div>
                 <div class="col-12 col-md-12 col-lg-5 p-0">
-                  <div class="card-header text-center"><h4>Dados da empresa</h4></div>
+                  
                   <div class="card-body">
                     <%= form_with(model: @company, local: true, url: borrower_request_companies_path) do |form| %>
 
@@ -42,7 +43,6 @@
                   </div>  
                 </div>
                 <div class="col-12 col-md-12 col-lg-7 p-0">
-                  <div class="card-header text-center"></div>
                   <%= form.fields_for :address do |address_form| %>
                   <div class="card-body">
                       <div class="form-row">
