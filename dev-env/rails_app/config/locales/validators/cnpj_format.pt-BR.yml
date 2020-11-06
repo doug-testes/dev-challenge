@@ -1,0 +1,4 @@
+pt-BR:
+  errors:
+    messages:
+      cnpj_format: "o CNPJ não é válido"
