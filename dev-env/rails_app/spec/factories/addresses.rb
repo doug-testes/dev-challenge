@@ -1,12 +1,12 @@
 FactoryBot.define do
   factory :address do
-    street { "MyString" }
-    number { "MyString" }
-    postal_code { "MyString" }
-    complement { "" }
+    street { Faker::Address.street_name }
+    number { Faker::Address.building_number }
+    postal_code { Faker::Address.postcode }
+    complement { Faker::Address.secondary_address }
     neighbourhood { "MyString" }
-    city { "MyString" }
-    state { "MyString" }
-    company { nil }
+    city { Faker::Address.city }
+    state { Faker::Address.state }
+    company { build(:company) }
   end
 end

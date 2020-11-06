@@ -1,10 +1,9 @@
 class BorrowerService
-
   def initialize()
   end
 
   def generate_review(borrower_request)
-
+    return { error: "Borrower Request invalid" } if (borrower_request.status != "draft")
     start_date = DateTime.now + 1.month
 
     loan_result = calculate_loan(
@@ -14,45 +13,45 @@ class BorrowerService
       borrower_request.installments
     )
     borrower_request.assign_attributes(
-      status: 'review',
+      status: "review",
       installments_amount_in_cents: loan_result[:result][:installment_amount_per_month],
       total_amount_payable_in_cents: loan_result[:result][:loan_amount_to_pay],
       start_date: start_date,
-      end_date: loan_result[:result][:end_date]
+      end_date: loan_result[:result][:end_date],
     )
 
     if (borrower_request.save())
-      return {result: borrower_request}
+      return { result: borrower_request }
     else
-      return {error: borrower_request.errors}
+      return { error: borrower_request.errors }
     end
   end
 
   def approve(borrower_request)
-
-    borrower_request.installments.times.each do | installment_number |
+    return { error: "Borrower Request invalid" } if (borrower_request.status != "review")
+    borrower_request.installments.times.each do |installment_number|
       borrower_request.borrower_installments.create(
-        amount_in_cents: borrower_request.installments_amount_in_cents ,
+        amount_in_cents: borrower_request.installments_amount_in_cents,
         due_date: borrower_request.start_date + installment_number.month,
-        installment_number: (installment_number + 1)
+        installment_number: (installment_number + 1),
       )
     end
 
     borrower_request.assign_attributes(
-      status: 'approved'
+      status: "approved",
     )
 
     if (borrower_request.save() and borrower_request.borrower_installments.count() == borrower_request.installments)
-      return {result: borrower_request }
+      return { result: borrower_request }
     else
-      return {error: borrower_request }
+      return { error: borrower_request }
     end
-
   end
 
   def calculate_loan(start_date, loan_amount, rate, number_installments, round = true)
+    return { error: "Invalid values" } if (loan_amount <= 0 or number_installments <= 0 or rate <= 0.00)
     pmt = loan_amount * ((((1 + rate) ** number_installments) * rate) / (((1 + rate) ** number_installments) - 1))
-    if (round)
+    if (round == true)
       installment_amount_per_month = pmt.ceil
     else
       installment_amount_per_month = pmt
@@ -62,19 +61,18 @@ class BorrowerService
 
     loan_amount_to_pay = installment_amount_per_month * number_installments
 
-    return { result: { 
-      loan_amount: loan_amount,
-      loan_amount_to_pay: loan_amount_to_pay,
-      installment_amount_per_month: installment_amount_per_month, 
-      rate: rate,
-      number_installments: number_installments,
-      round: round,
-      start_date: start_date, 
-      end_date: end_date,
+    return { result: {
+             loan_amount: loan_amount,
+             loan_amount_to_pay: loan_amount_to_pay,
+             installment_amount_per_month: installment_amount_per_month,
+             rate: rate,
+             number_installments: number_installments,
+             round: round,
+             start_date: start_date,
+             end_date: end_date,
 
-      } 
-    }
-    rescue e
-      return { error: e}  
+           } }
+  rescue
+    return { error: "Excpetion" }
   end
 end
