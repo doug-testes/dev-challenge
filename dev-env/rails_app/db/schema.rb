@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2020_11_04_032426) do
   create_table "borrower_installments", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.bigint "borrower_request_id", null: false
-    t.integer "amount_in_cents", default: 0, null: false
+    t.bigint "amount_in_cents", default: 0, null: false
     t.date "due_date", null: false
     t.integer "installment_number", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -42,11 +42,11 @@ ActiveRecord::Schema.define(version: 2020_11_04_032426) do
 
   create_table "borrower_requests", force: :cascade do |t|
     t.integer "status", default: 0, null: false
-    t.integer "loan_amount_in_cents", default: 0, null: false
+    t.bigint "loan_amount_in_cents", default: 0, null: false
     t.decimal "rate", default: "0.015", null: false
     t.integer "installments", default: 12, null: false
-    t.integer "installments_amount_in_cents", default: 0, null: false
-    t.integer "total_amount_payable_in_cents", default: 0, null: false
+    t.bigint "installments_amount_in_cents", default: 0, null: false
+    t.bigint "total_amount_payable_in_cents", default: 0, null: false
     t.date "start_date"
     t.date "end_date"
     t.datetime "created_at", precision: 6, null: false
