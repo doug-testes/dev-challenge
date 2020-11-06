@@ -1,0 +1,27 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    <% flash.each do |key, value| %>
+      <% unless value.blank? %>
+
+        switch ('<%= key %>') {
+          case 'notice':
+            iziToast.success({
+              title: 'Sucesso!',
+              message: '<%= value %>',
+              position: 'topRight'
+            })
+            break
+          case 'error':
+          case 'alert':
+            iziToast.error({
+              title: 'Falha',
+              message: '<%= value %>',
+              position: 'topRight'
+            })
+            break
+        }
+
+      <% end %>
+    <% end %>
+  })
+</script>

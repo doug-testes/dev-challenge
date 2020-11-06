@@ -1,0 +1,38 @@
+<div class="main-content">
+
+  <div clas="row">
+      <section class="section">
+      <div class="container mt-5">
+        <div class="page-error">
+          <div class="page-inner">
+            <h2>Empréstimo</h2>
+            <h2>para o seu negócio</h2>
+            <div class="page-search">
+
+
+            <%= form_with(model: @borrower_request, local: true) do |form| %>
+
+              <div class="form-row">
+                <div class="form-group col">
+                  <div class="input-group field">
+                    <%= form.hidden_field :loan_amount_in_cents, class: "loan_value" %>
+                    <%= text_field_tag(:loan_amount_in_cents_mask, "", class: "form-control mask-money", placeholder: "Quanto você precisa?", required: true) %>
+                    <%= bootstrap_errors_list(@borrower_request, :loan_value) %>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                  <div class="actions col">
+                    <%= form.submit "Solicitar", class: "btn btn-primary btn-lg" %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  </div>
+</div>
