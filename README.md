@@ -60,6 +60,7 @@ Você pode fazer sua solitiação agora mesmo pelo site: https://nexx-app.heroku
 Execute os comandos abaixo para iniciar seu ambiente de desenvolvimento utilizando o Docker Compose na porta 3001
 
 1. `git clone https://github.com/doug-testes/dev-challenge.git`
+1. `git checkout development`
 1. `cd dev-challenge/dev-env`
 1. `cp rails_app/.env.sample rails_app/.env`
 1. `docker-compose build`
